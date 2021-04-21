@@ -1,0 +1,113 @@
+html {
+    box-sizing: border-box;
+  }
+  
+  *, *:after, *:before {
+    box-sizing: inherit;
+  }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    margin:auto;
+    width: 100%;
+    }
+
+    html {
+        --background-main: #d6d6d7;
+        --background-sub: whitesmoke;
+        --grey: #0c222c;
+        --light: #f3ddd3;
+        --tabs: #e0a68c;
+        --link: #d17a53;
+      }
+
+    header {
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url(images/grass.jpg);
+        background-size: cover;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        color: whitesmoke;
+      }
+
+    .intro__content{
+        font-size: 2rem;
+        margin: 10rem 0 10rem 0;
+    }
+
+    .intro__content--autor{
+        font-size: 0.8rem;
+        font-style: italic;
+    }
+
+    .work, .contact{
+        background-color: var(--background-main);
+        padding: 4rem 2rem 4rem 2rem;
+    }
+
+    .about{
+        background-color: var(--background-sub);
+        padding: 5rem 2rem 5rem 2rem;
+    }
+
+    .gestalt-therapy__content--herenow{
+        width: 180px;
+        height:40px;
+        background-color: #ffbd40;
+        border-radius: 8px;
+        text-align: center;
+        margin: 40px;
+    }
+
+    .gestalt-therapy__content--dialog{
+        width: 160px;
+        height:40px;
+        background-color: #ecb753;
+        border-radius: 8px;
+        text-align: center;
+        margin: 40px;
+    }
+    .gestalt-therapy__content--fenomenology{
+        width: 140px;
+        height:40px;
+        background-color: #ddb262;
+        border-radius: 8px;
+        text-align: center;
+        margin: 40px;
+    }
+
+    .about__experience-list--first{
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+
+    .about__experience-list--second{
+        font-size: 1.2rem;
+        font-weight: normal;
+    }
+
+    .about__experience-list--third{
+        font-size: 0.8rem;
+        font-weight: lighter;
+    }
+
+    .about__education-list--first{
+        color: violet;
+        font-style: italic;
+    }
+    .about__education-list--second{
+        color: darkcyan;
+        font-style: oblique;
+    }
+    .about__education-list--third{
+        color:hotpink;
+        font-variant: small-caps;
+        
+    }
+
+    .foot__copy{
+        text-align: center;
+    }
