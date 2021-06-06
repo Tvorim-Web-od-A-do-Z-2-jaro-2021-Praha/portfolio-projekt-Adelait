@@ -1,4 +1,63 @@
 /*colors*/
+@-webkit-keyframes animationY {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  50% {
+    -webkit-transform: rotateY(90deg);
+            transform: rotateY(90deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+@keyframes animationY {
+  0% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+  50% {
+    -webkit-transform: rotateY(90deg);
+            transform: rotateY(90deg);
+  }
+  100% {
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+  }
+}
+
+@-webkit-keyframes animationX {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+  }
+  50% {
+    -webkit-transform: rotateX(90deg);
+            transform: rotateX(90deg);
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+  }
+}
+
+@keyframes animationX {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+  }
+  50% {
+    -webkit-transform: rotateX(90deg);
+            transform: rotateX(90deg);
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+  }
+}
+
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -17,6 +76,7 @@ body {
   width: 100%;
   padding: 0.2rem;
   background-color: #dfdde3;
+  color: #000000;
   display: -ms-grid;
   display: grid;
   grid-row-gap: 0.5rem;
@@ -50,16 +110,6 @@ body {
         -ms-flex-direction: row;
             flex-direction: row;
   }
-  .professional .about {
-    -webkit-box-flex: 2;
-        -ms-flex: 2;
-            flex: 2;
-  }
-  .professional .contact {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -76,23 +126,200 @@ body {
 }
 
 .nav {
-  background-color: #dfdde3;
   -ms-grid-row: 1;
       grid-row-start: 1;
+  background-color: #dfdde3;
+  margin: -0.2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
 }
 
-.nav a {
+.nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+.nav li a {
+  display: block;
+  padding: 5px 20px;
   text-decoration: none;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #000000;
+}
+
+.nav .nav__item--psychotherapy:hover {
+  background-color: #ffe7ad;
+}
+
+.nav .nav__item--coaching:hover {
+  background-color: #bbdef0;
+}
+
+.nav .nav__item--workshops:hover {
+  background-color: #dbf9f0;
+}
+
+.nav .nav__item--about:hover {
+  background-color: #d8c0c5;
+}
+
+.nav .nav__item--contact:hover {
+  background-color: #b0b8bf;
+}
+
+.nav__logo {
+  float: left;
+  display: block;
+  padding: 10px 0 0 10px;
+}
+
+.nav .svg__logo:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+}
+
+.nav .svg__logo:hover path {
+  fill: #be6f72;
+}
+
+.nav__menu {
+  clear: both;
+  max-height: 0;
+  -webkit-transition: max-height 0.2s ease-out;
+  transition: max-height 0.2s ease-out;
+}
+
+.nav .menu__icon {
+  cursor: pointer;
+  float: right;
+  padding: 20px 20px;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.nav .menu__icon .nav__icon {
+  background: #be6f72;
+  display: block;
+  height: 2px;
+  position: relative;
+  -webkit-transition: background 0.2s ease-out;
+  transition: background 0.2s ease-out;
+  width: 24px;
+  margin-top: 5px;
+}
+
+.nav .menu__icon .nav__icon:before {
+  background: #be6f72;
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  top: 5px;
+}
+
+.nav .menu__icon .nav__icon:after {
+  background: #be6f72;
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  top: -5px;
+}
+
+.nav .menu__btn {
+  display: none;
+}
+
+.nav .menu__btn:checked ~ .nav__menu {
+  max-height: 240px;
+}
+
+.nav .menu__btn:checked ~ .menu__icon .nav__icon {
+  background: #dfdde3;
+}
+
+.nav .menu__btn:checked ~ .menu__icon .nav__icon:before {
+  top: 0;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.nav .menu__btn:checked ~ .menu__icon .nav__icon:after {
+  top: 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+@media (min-width: 900px) {
+  .nav {
+    background-color: #dfdde3;
+    -ms-grid-row: 1;
+        grid-row-start: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .nav .menu__btn,
+  .nav .menu__icon {
+    display: none;
+  }
+  .nav .nav__menu {
+    overflow: visible;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .nav a {
+    margin: 2px;
+    text-decoration: none;
+  }
+  .nav a:hover {
+    border-radius: 8px;
+  }
 }
 
 header {
   -ms-grid-row: 2;
       grid-row-start: 2;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.4))), url(images/grass.jpg);
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/grass.jpg);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.4))), url(images/fields.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/fields.jpg);
   background-size: cover;
   width: 100%;
   margin: 0;
+  margin-top: 10px;
   border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -106,13 +333,41 @@ header {
 }
 
 header .intro__content {
-  font-size: 2rem;
-  margin: 10rem 0 10rem 0;
+  font-size: 1.8rem;
+  margin: 3rem 0 3rem 0;
+  font-style: italic;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
 }
 
 header .intro__content--autor {
-  font-size: 0.8rem;
-  font-style: italic;
+  font-size: 1.2rem;
+}
+
+header .intro__credit {
+  color: #f0f1ea;
+  font-size: 0.4em;
+  margin-bottom: 5px;
+  text-align: right;
+  margin-right: 5px;
+}
+
+header .intro__credit a {
+  text-decoration: none;
+  color: #f0f1ea;
+}
+
+@media (min-width: 900px) {
+  header .intro__content {
+    font-size: 2.5rem;
+    margin: 6rem 0 6rem 0;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+  }
+  header .intro__content--autor {
+    font-size: 2rem;
+  }
 }
 
 /*content*/
@@ -131,31 +386,87 @@ header .intro__content--autor {
   text-align: center;
 }
 
-.services .psychotherapy .gestalt-therapy__content--herenow {
-  width: 15rem;
-  height: 2rem;
-  background-color: #ffbd40;
-  border-radius: 8px;
+.services .psychotherapy h2 {
   text-align: center;
-  margin: 2rem;
+  margin-top: 2rem;
+}
+
+.services .psychotherapy .gestalt-therapy__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.services .psychotherapy .gestalt-therapy__content--herenow {
+  width: 6.5rem;
+  height: 6.5rem;
+  background-color: #ffbd40;
+  border-radius: 50%;
+  text-align: center;
+  margin: 0.2rem;
+}
+
+.services .psychotherapy .gestalt-therapy__content--herenow p {
+  padding-top: 1rem;
 }
 
 .services .psychotherapy .gestalt-therapy__content--dialog {
-  width: 12rem;
-  height: 2rem;
+  width: 6.5rem;
+  height: 6.5rem;
   background-color: #ecb753;
-  border-radius: 8px;
+  border-radius: 50%;
   text-align: center;
-  margin: 2rem;
+  margin: 0.2rem;
+}
+
+.services .psychotherapy .gestalt-therapy__content--dialog p {
+  padding-top: 1rem;
 }
 
 .services .psychotherapy .gestalt-therapy__content--fenomenology {
-  width: 9rem;
-  height: 2rem;
+  width: 6.5rem;
+  height: 6.5rem;
   background-color: #ddb262;
-  border-radius: 8px;
+  border-radius: 50%;
   text-align: center;
-  margin: 2rem;
+  margin: 0.2rem;
+}
+
+.services .psychotherapy .gestalt-therapy__content--fenomenology p {
+  padding-top: 1rem;
+}
+
+.services .psychotherapy details {
+  margin: 0.8rem;
+  border-radius: 10px;
+}
+
+.services .psychotherapy details p {
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.services .psychotherapy details[open] summary {
+  border-radius: 10px 10px 0 0;
+}
+
+.services .psychotherapy details[open] {
+  border: 1px dashed #b0b8bf;
+}
+
+.services .psychotherapy summary {
+  background-color: #b0b8bf;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-weight: bold;
 }
 
 .services .coaching {
@@ -193,34 +504,94 @@ header .intro__content--autor {
   text-align: center;
 }
 
-.professional .about .about__experience-list--first {
-  font-size: 1.6rem;
-  font-weight: bold;
+.professional .about h3 {
+  text-align: center;
 }
 
-.professional .about .about__experience-list--second {
-  font-size: 1.2rem;
-  font-weight: normal;
+.professional .about img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
 }
 
-.professional .about .about__experience-list--third {
-  font-size: 0.8rem;
-  font-weight: lighter;
+@media (min-width: 900px) {
+  .professional .about img {
+    border-radius: 2rem;
+  }
 }
 
-.professional .about .about__education-list--first {
-  color: #ee82ee;
-  font-style: italic;
+.professional .about__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.professional .about .about__education-list--second {
-  color: #008b8b;
-  font-style: oblique;
+.professional .about__photo, .professional .about__general {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin: 1rem;
 }
 
-.professional .about .about__education-list--third {
-  color: #ff69b4;
-  font-variant: small-caps;
+.professional .about__experience, .professional .about__education {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 2rem;
+  border: 1px dashed #b0b8bf;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin: 1rem;
+}
+
+.professional .about__experience .data__heading, .professional .about__education .data__heading {
+  border-radius: 2rem 2rem 0 0;
+  padding-bottom: 2rem;
+  background-color: #b0b8bf;
+  vertical-align: middle;
+}
+
+@media (min-width: 1200px) {
+  .professional .about__data {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    margin-top: 2rem;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .professional .about__basic {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    margin-top: 2rem;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+  }
 }
 
 .professional .contact {
@@ -234,12 +605,58 @@ header .intro__content--autor {
   text-align: center;
 }
 
+.professional .contact__icon img {
+  width: 250px;
+  height: auto;
+}
+
+.professional .contact__address {
+  margin-top: 0;
+}
+
 .professional .contact .bold-text {
   font-weight: bold;
 }
 
 .professional .contact .underlined-text {
   text-decoration: underline;
+}
+
+.professional .contact a {
+  text-decoration: none;
+  color: #be6f72;
+  font-weight: bold;
+}
+
+.professional .contact .tel__svg {
+  margin-bottom: 16px;
+}
+
+.professional .contact .svg__at,
+.professional .contact .svg__handset {
+  padding: 2px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+  stroke-width: 3;
+}
+
+.professional .contact .svg__at:hover,
+.professional .contact .svg__handset:hover {
+  border: 2px solid #be6f72;
+  fill: #be6f72;
+}
+
+.professional .contact .svg__at:hover {
+  -webkit-animation: animationX 500ms ease-in;
+          animation: animationX 500ms ease-in;
+}
+
+.professional .contact .svg__handset:hover {
+  -webkit-animation: animationY 500ms ease-out;
+          animation: animationY 500ms ease-out;
 }
 
 /*footer*/
