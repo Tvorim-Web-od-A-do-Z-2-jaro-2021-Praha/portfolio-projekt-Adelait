@@ -133,6 +133,7 @@ body {
   position: fixed;
   width: 100%;
   z-index: 3;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .nav ul {
@@ -224,7 +225,7 @@ body {
   width: 100%;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
-  top: 5px;
+  top: 4px;
 }
 
 .nav .menu__icon .nav__icon:after {
@@ -236,7 +237,7 @@ body {
   width: 100%;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
-  top: -5px;
+  top: -4px;
 }
 
 .nav .menu__btn {

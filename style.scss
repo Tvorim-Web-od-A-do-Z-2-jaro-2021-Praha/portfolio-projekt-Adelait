@@ -110,6 +110,7 @@ body {
   position: fixed;
   width: 100%;
   z-index: 3;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   ul {
     margin: 0;
@@ -188,7 +189,7 @@ body {
     height: 100%;
     width: 100%;
     transition: all 0.1s ease-out;
-    top: 5px;
+    top: 4px;
   }
 
   .menu__icon .nav__icon:after {
@@ -199,7 +200,7 @@ body {
     height: 100%;
     width: 100%;
     transition: all 0.1s ease-out;
-    top: -5px;
+    top: -4px;
   }
 
   .menu__btn {
