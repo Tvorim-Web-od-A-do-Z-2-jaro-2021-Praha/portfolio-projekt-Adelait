@@ -1,16 +1,64 @@
-$grid-column-gap: 0.5rem;
 $grid-row-gap: 0.5rem;
+
+$flex-gap: 0.5rem;
+
+/*colors*/
 $background-color-main: #dfdde3;
 $background-color-sub: #f0f1ea;
+$font-color: #000000;
 $color-about: #d8c0c5;
 $color-coaching: #bbdef0;
 $color-workshops: #dbf9f0;
 $color-psychotherapy: #ffe7ad;
 $color-contact: #b0b8bf;
+$color-link: #be6f72;
+
 $border-radius-section: 8px;
 $border-radius-content: 8px;
 $text-align-center: center;
 $section-padding: 2rem;
+
+@mixin flex-gaps($gap: $flex-gap) {
+  display: flex;
+  gap: $gap;
+}
+
+@mixin section-style() {
+  padding: $section-padding;
+  border-radius: $border-radius-section;
+  h1 {
+    text-align: $text-align-center;
+  }
+}
+
+@mixin h2-style() {
+  text-align: $text-align-center;
+  margin-top: 2rem;
+}
+
+@keyframes animationY {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes animationX {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
 
 html {
   box-sizing: border-box;
@@ -22,205 +70,469 @@ html {
   box-sizing: inherit;
 }
 
-@mixin grid-gaps($columnGap: $grid-column-gap, $rowGap: $grid-row-gap) {
-  grid-column-gap: $columnGap;
-  grid-row-gap: $rowGap;
-}
-
 body {
   font-family: "Quicksand", sans-serif;
   margin: auto;
   width: 100%;
   padding: 0.2rem;
   background-color: $background-color-main;
+  color: $font-color;
   display: grid;
-  @include grid-gaps();
+  grid-row-gap: $grid-row-gap;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(2rem, auto) repeat(6, auto) minmax(2rem, auto);
-  grid-template-areas:
-    "nav"
-    "intro"
-    "psychotherapy"
-    "coaching"
-    "workshops"
-    "about"
-    "contact"
-    "foot";
+  grid-template-rows: minmax(2rem, auto) repeat(3, auto) minmax(2rem, auto);
+}
 
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: minmax(2rem, auto) repeat(5, auto) minmax(2rem, auto);
-    grid-template-areas:
-      "nav nav nav"
-      "intro intro intro"
-      "psychotherapy psychotherapy psychotherapy"
-      "coaching coaching coaching"
-      "workshops workshops workshops"
-      "about about contact"
-      "foot foot foot";
+.services,
+.professional,
+.other-work {
+  @include flex-gaps($flex-gap);
+  flex-direction: column;
+}
+
+@media (min-width: 900px) {
+  .professional {
+    @include flex-gaps($flex-gap);
+    flex-direction: row;
   }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: minmax(2rem, auto) repeat(4, auto) minmax(2rem, auto);
-    grid-template-areas:
-      "nav nav nav nav"
-      "intro intro intro intro"
-      "psychotherapy psychotherapy coaching coaching"
-      "psychotherapy psychotherapy workshops workshops"
-      "about about about contact"
-      "foot foot foot foot";
+}
+@media (min-width: 1200px) {
+  .services {
+    @include flex-gaps($flex-gap);
+    flex-direction: row;
   }
 }
 
 .nav {
-  grid-area: nav;
+  grid-row-start: 1;
   background-color: $background-color-main;
+  margin: -0.2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-  a {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+  }
+
+  li a {
+    display: block;
+    padding: 5px 20px;
     text-decoration: none;
+    text-align: center;
+    font-size: 1.2rem;
+    color: $font-color;
+  }
+
+  .nav__item--psychotherapy:hover {
+    background-color: $color-psychotherapy;
+  }
+  .nav__item--coaching:hover {
+    background-color: $color-coaching;
+  }
+  .nav__item--workshops:hover {
+    background-color: $color-workshops;
+  }
+  .nav__item--about:hover {
+    background-color: $color-about;
+  }
+  .nav__item--contact:hover {
+    background-color: $color-contact;
+  }
+
+  &__logo {
+    float: left;
+    display: block;
+    padding: 10px 0 0 10px;
+  }
+
+  .svg__logo:hover {
+    transform: scale(1.1, 1.1);
+    path {
+      fill: $color-link;
+    }
+  }
+
+  &__menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .menu__icon {
+    cursor: pointer;
+    float: right;
+    padding: 20px 20px;
+    position: relative;
+    user-select: none;
+  }
+
+  .menu__icon .nav__icon {
+    background: $color-link;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background 0.2s ease-out;
+    width: 24px;
+    margin-top: 5px;
+  }
+
+  .menu__icon .nav__icon:before {
+    background: $color-link;
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: all 0.1s ease-out;
+    top: 4px;
+  }
+
+  .menu__icon .nav__icon:after {
+    background: $color-link;
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: all 0.1s ease-out;
+    top: -4px;
+  }
+
+  .menu__btn {
+    display: none;
+  }
+
+  .menu__btn:checked ~ .nav__menu {
+    max-height: 240px;
+  }
+
+  .menu__btn:checked ~ .menu__icon .nav__icon {
+    background: $background-color-main;
+  }
+
+  .menu__btn:checked ~ .menu__icon .nav__icon:before {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .menu__btn:checked ~ .menu__icon .nav__icon:after {
+    top: 0;
+    transform: rotate(45deg);
+  }
+}
+
+@media (min-width: 900px) {
+  .nav {
+    background-color: $background-color-main;
+    grid-row-start: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .menu__btn,
+    .menu__icon {
+      display: none;
+    }
+
+    .nav__menu {
+      overflow: visible;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    a {
+      margin: 2px;
+      text-decoration: none;
+
+      &:hover {
+        border-radius: $border-radius-content;
+      }
+    }
   }
 }
 
 header {
+  grid-row-start: 2;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(images/grass.jpg);
+    url(images/fields.jpg);
   background-size: cover;
   width: 100%;
   margin: 0;
+  margin-top: 10px;
   border-radius: $border-radius-section;
   display: flex;
   flex-direction: column;
   text-align: $text-align-center;
   color: $background-color-sub;
-  grid-area: intro;
 
   .intro__content {
-    font-size: 2rem;
-    margin: 10rem 0 10rem 0;
+    font-size: 1.8rem;
+    margin: 3rem 0 3rem 0;
+    font-style: italic;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
 
     &--autor {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  .intro__credit {
+    color: $background-color-sub;
+    font-size: 0.4em;
+    margin-bottom: 5px;
+    text-align: right;
+    margin-right: 5px;
+
+    a {
+      text-decoration: none;
+      color: $background-color-sub;
+    }
+  }
+  @media (min-width: 900px) {
+    .intro__content {
+      font-size: 2.5rem;
+      margin: 6rem 0 6rem 0;
       font-style: italic;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+
+      &--autor {
+        font-size: 2rem;
+      }
     }
   }
 }
 
 /*content*/
+.services {
+  grid-row-start: 3;
+  .psychotherapy {
+    background-color: $color-psychotherapy;
+    @include section-style();
 
-@mixin section-style() {
-  padding: $section-padding;
-  border-radius: $border-radius-section;
-  h1 {
+    h2 {
+      @include h2-style();
+    }
+    .gestalt-therapy__content {
+      display: flex;
+      width: 80%;
+      margin: auto;
+      flex-direction: row;
+      justify-content: space-around;
+
+      &--herenow {
+        width: 6.5rem;
+        height: 6.5rem;
+        background-color: #ffbd40;
+        border-radius: 50%;
+        text-align: $text-align-center;
+        margin: 0.2rem;
+
+        p {
+          padding-top: 1rem;
+        }
+      }
+
+      &--dialog {
+        width: 6.5rem;
+        height: 6.5rem;
+        background-color: #ecb753;
+        border-radius: 50%;
+        text-align: $text-align-center;
+        margin: 0.2rem;
+
+        p {
+          padding-top: 1rem;
+        }
+      }
+      &--fenomenology {
+        width: 6.5rem;
+        height: 6.5rem;
+        background-color: #ddb262;
+        border-radius: 50%;
+        text-align: $text-align-center;
+        margin: 0.2rem;
+
+        p {
+          padding-top: 1rem;
+        }
+      }
+    }
+
+    details {
+      margin: 0.8rem;
+      border-radius: 10px;
+
+      p {
+        text-align: center;
+        padding: 0.8rem;
+      }
+
+      &[open] summary {
+        border-radius: 10px 10px 0 0;
+      }
+
+      &[open] {
+        border: 1px dashed $color-contact;
+      }
+    }
+    summary {
+      background-color: $color-contact;
+      padding: 0.8rem;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  }
+
+  .coaching {
+    background-color: $color-coaching;
+    @include section-style();
+  }
+
+  .workshops {
+    background-color: $color-workshops;
+    @include section-style();
+  }
+}
+
+.professional {
+  grid-row-start: 4;
+
+  .about {
+    background-color: $color-about;
+    @include section-style();
+
+    h3 {
+      text-align: $text-align-center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 50%;
+      display: block;
+      margin: auto;
+
+      @media (min-width: 900px) {
+        border-radius: 2rem;
+      }
+    }
+
+    &__wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__photo,
+    &__general {
+      flex-grow: 1;
+      margin: 1rem;
+    }
+
+    &__experience,
+    &__education {
+      display: flex;
+      flex-direction: column;
+      border-radius: 2rem;
+      border: 1px dashed $color-contact;
+      flex-grow: 1;
+      margin: 1rem;
+
+      .data__heading {
+        border-radius: 2rem 2rem 0 0;
+        padding-bottom: 2rem;
+        background-color: $color-contact;
+        vertical-align: middle;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      &__data {
+        display: flex;
+        flex-direction: row;
+        margin-top: 2rem;
+        justify-content: space-between;
+      }
+
+      &__basic {
+        display: flex;
+        flex-direction: row;
+        margin-top: 2rem;
+        justify-content: space-between;
+        align-items: stretch;
+      }
+    }
+  }
+
+  .contact {
+    background-color: $color-contact;
+    @include section-style();
     text-align: $text-align-center;
-  }
-}
 
-.psychotherapy {
-  grid-area: psychotherapy;
-  background-color: $color-psychotherapy;
-  @include section-style();
-
-  .gestalt-therapy__content {
-    &--herenow {
-      width: 15rem;
-      height: 2rem;
-      background-color: #ffbd40;
-      border-radius: $border-radius-content;
-      text-align: $text-align-center;
-      margin: 2rem;
+    &__icon img {
+      width: 250px;
+      height: auto;
     }
 
-    &--dialog {
-      width: 12rem;
-      height: 2rem;
-      background-color: #ecb753;
-      border-radius: $border-radius-content;
-      text-align: center;
-      margin: 2rem;
+    &__address {
+      margin-top: 0;
     }
-    &--fenomenology {
-      width: 9rem;
-      height: 2rem;
-      background-color: #ddb262;
-      border-radius: $border-radius-content;
-      text-align: $text-align-center;
-      margin: 2rem;
+
+    .bold-text {
+      font-weight: bold;
     }
-  }
-}
+    .underlined-text {
+      text-decoration: underline;
+    }
 
-.coaching {
-  grid-area: coaching;
-  background-color: $color-coaching;
-  @include section-style();
-}
-
-.workshops {
-  grid-area: workshops;
-  background-color: $color-workshops;
-  @include section-style();
-}
-
-.about {
-  grid-area: about;
-  background-color: $color-about;
-  @include section-style();
-
-  .about__experience-list {
-    &--first {
-      font-size: 1.6rem;
+    a {
+      text-decoration: none;
+      color: $color-link;
       font-weight: bold;
     }
 
-    &--second {
-      font-size: 1.2rem;
-      font-weight: normal;
+    .tel__svg {
+      margin-bottom: 16px;
     }
 
-    &--third {
-      font-size: 0.8rem;
-      font-weight: lighter;
-    }
-  }
+    .svg__at,
+    .svg__handset {
+      padding: 2px;
+      border: 1px solid $font-color;
+      border-radius: 50%;
+      cursor: pointer;
+      vertical-align: middle;
+      margin-right: 0.2rem;
+      stroke-width: 3;
 
-  .about__education-list {
-    &--first {
-      color: #ee82ee;
-      font-style: italic;
+      &:hover {
+        border: 2px solid $color-link;
+        fill: $color-link;
+      }
     }
-    &--second {
-      color: #008b8b;
-      font-style: oblique;
+
+    .svg__at:hover {
+      animation: animationX 500ms ease-in;
     }
-    &--third {
-      color: #ff69b4;
-      font-variant: small-caps;
+
+    .svg__handset:hover {
+      animation: animationY 500ms ease-out;
     }
-  }
-}
-
-.contact {
-  grid-area: contact;
-  background-color: $color-contact;
-  @include section-style();
-  text-align: $text-align-center;
-
-  /*width: 80%;
-  margin: auto;
-  padding: auto;*/
-
-  .bold-text {
-    font-weight: bold;
-  }
-  .underlined-text {
-    text-decoration: underline;
   }
 }
 
 /*footer*/
 .foot {
-  grid-area: foot;
+  grid-row-start: 5;
   background-color: $background-color-main;
 
   &__copy {
